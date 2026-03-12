@@ -2,10 +2,13 @@ package com.real_estate.model.dto.response;
 
 import com.real_estate.model.enums.ApartmentStatus;
 import com.real_estate.model.enums.ApartmentType;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class ApartmentResponseDTO {
     private Long id;
 

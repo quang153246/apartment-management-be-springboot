@@ -28,11 +28,12 @@ public class ApartmentController {
                         .success(true)
                         .message("Create apartment successfully")
                         .data(apartment)
-                        .build()
-        );
+                        .build());
     }
+
     @GetMapping
-    public ResponseEntity<BaseResponseDTO<Page<ApartmentResponseDTO>>> getApartments(Pageable pageable) {
+    public ResponseEntity<BaseResponseDTO<Page<ApartmentResponseDTO>>> getApartments(
+            Pageable pageable) {
 
         Page<ApartmentResponseDTO> apartments = apartmentService.getApartments(pageable);
 
@@ -41,12 +42,12 @@ public class ApartmentController {
                         .success(true)
                         .message("Get apartments successfully")
                         .data(apartments)
-                        .build()
-        );
+                        .build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponseDTO<ApartmentResponseDTO>> getApartmentById(@PathVariable Long id) {
+    public ResponseEntity<BaseResponseDTO<ApartmentResponseDTO>> getApartmentById(
+            @PathVariable Long id) {
 
         ApartmentResponseDTO apartment = apartmentService.getApartmentById(id);
 
@@ -55,14 +56,12 @@ public class ApartmentController {
                         .success(true)
                         .message("Get apartment successfully")
                         .data(apartment)
-                        .build()
-        );
+                        .build());
     }
 
     @GetMapping("/building/{buildingId}")
     public ResponseEntity<BaseResponseDTO<Page<ApartmentResponseDTO>>> getApartmentsByBuilding(
-            @PathVariable Long buildingId,
-            Pageable pageable) {
+            @PathVariable Long buildingId, Pageable pageable) {
 
         Page<ApartmentResponseDTO> apartments =
                 apartmentService.getApartmentsByBuildingId(buildingId, pageable);
@@ -72,14 +71,12 @@ public class ApartmentController {
                         .success(true)
                         .message("Get apartments successfully")
                         .data(apartments)
-                        .build()
-        );
+                        .build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponseDTO<ApartmentResponseDTO>> updateApartment(
-            @PathVariable Long id,
-            @Valid @RequestBody CreateApartmentRequest request) {
+            @PathVariable Long id, @Valid @RequestBody CreateApartmentRequest request) {
 
         ApartmentResponseDTO apartment = apartmentService.updateApartment(id, request);
 
@@ -88,8 +85,7 @@ public class ApartmentController {
                         .success(true)
                         .message("Update apartment successfully")
                         .data(apartment)
-                        .build()
-        );
+                        .build());
     }
 
     @DeleteMapping("/{id}")
@@ -101,7 +97,6 @@ public class ApartmentController {
                 BaseResponseDTO.<Void>builder()
                         .success(true)
                         .message("Delete apartment successfully")
-                        .build()
-        );
+                        .build());
     }
 }

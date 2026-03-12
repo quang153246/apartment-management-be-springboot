@@ -1,7 +1,6 @@
 package com.real_estate.controller;
 
 import com.real_estate.model.dto.request.CreateProjectRequest;
-
 import com.real_estate.model.dto.response.BaseResponseDTO;
 import com.real_estate.model.dto.response.ProjectResponse;
 import com.real_estate.service.ProjectService;
@@ -18,15 +17,17 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @PostMapping("")
-    ResponseEntity<BaseResponseDTO<ProjectResponse>> createProject(@RequestBody CreateProjectRequest request) {
+    ResponseEntity<BaseResponseDTO<ProjectResponse>> createProject(
+            @RequestBody CreateProjectRequest request) {
         ProjectResponse project = projectService.createProject(request);
 
         return ResponseEntity.ok()
-                .body( BaseResponseDTO.<ProjectResponse>builder()
-                .success(true)
-                .message("Create project successfully")
-                .data(project)
-                .build());
+                .body(
+                        BaseResponseDTO.<ProjectResponse>builder()
+                                .success(true)
+                                .message("Create project successfully")
+                                .data(project)
+                                .build());
     }
 
     @GetMapping("")
@@ -39,8 +40,7 @@ public class ProjectController {
                         .success(true)
                         .message("Get projects successfully")
                         .data(projectPage)
-                        .build()
-        );
+                        .build());
     }
 
     @GetMapping("/{id}")
@@ -52,8 +52,7 @@ public class ProjectController {
                         .success(true)
                         .message("Get project details successfully")
                         .data(project)
-                        .build()
-        );
+                        .build());
     }
 
     @DeleteMapping("/{id}")
@@ -65,14 +64,12 @@ public class ProjectController {
                         .success(true)
                         .message("Delete project successfully")
                         .data(null)
-                        .build()
-        );
+                        .build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponseDTO<ProjectResponse>> updateProject(
-            @PathVariable Long id,
-            @RequestBody CreateProjectRequest request) {
+            @PathVariable Long id, @RequestBody CreateProjectRequest request) {
 
         ProjectResponse response = projectService.updateProject(id, request);
 
@@ -81,7 +78,6 @@ public class ProjectController {
                         .success(true)
                         .message("Update project successfully")
                         .data(response)
-                        .build()
-        );
+                        .build());
     }
 }

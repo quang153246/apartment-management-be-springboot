@@ -25,41 +25,45 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     public ApartmentResponseDTO createApartment(CreateApartmentRequest request) {
-        BuildingEntity building = buildingRepository.findById(request.getBuildingId())
-                .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
+        BuildingEntity building =
+                buildingRepository
+                        .findById(request.getBuildingId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
 
-        ApartmentEntity apartment = ApartmentEntity.builder()
-                .building(building)
-                .code(request.getCode())
-                .floor(request.getFloor())
-                .area(request.getArea())
-                .bedrooms(request.getBedrooms())
-                .bathrooms(request.getBathrooms())
-                .direction(request.getDirection())
-                .view(request.getView())
-                .status(request.getStatus())
-                .type(request.getType())
-                .priceSale(request.getPriceSale())
-                .priceRent(request.getPriceRent())
-                .description(request.getDescription())
-                .build();
+        ApartmentEntity apartment =
+                ApartmentEntity.builder()
+                        .building(building)
+                        .code(request.getCode())
+                        .floor(request.getFloor())
+                        .area(request.getArea())
+                        .bedrooms(request.getBedrooms())
+                        .bathrooms(request.getBathrooms())
+                        .direction(request.getDirection())
+                        .view(request.getView())
+                        .status(request.getStatus())
+                        .type(request.getType())
+                        .priceSale(request.getPriceSale())
+                        .priceRent(request.getPriceRent())
+                        .description(request.getDescription())
+                        .build();
 
-        ApartmentEntity saved = apartmentRepository.save(apartment);
+        apartmentRepository.save(apartment);
 
-
-        return apartmentMapper.toDTO(saved);
+        return apartmentMapper.toDTO(apartment);
     }
 
     @Override
     public Page<ApartmentResponseDTO> getApartments(Pageable pageable) {
-        return apartmentRepository.findAll(pageable)
-                .map(apartmentMapper::toDTO);
+        return apartmentRepository.findAll(pageable).map(apartmentMapper::toDTO);
     }
 
     @Override
-    public Page<ApartmentResponseDTO> getApartmentsByBuildingId(Long buildingId, Pageable pageable) {
-        BuildingEntity building = buildingRepository.findById(buildingId)
-                .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
+    public Page<ApartmentResponseDTO> getApartmentsByBuildingId(
+            Long buildingId, Pageable pageable) {
+        BuildingEntity building =
+                buildingRepository
+                        .findById(buildingId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
 
         return apartmentRepository
                 .findByBuildingId(buildingId, pageable)
@@ -68,17 +72,20 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     public ApartmentResponseDTO getApartmentById(Long id) {
-        ApartmentEntity apartment = apartmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Apartment not found"));
+        ApartmentEntity apartment =
+                apartmentRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Apartment not found"));
 
         return apartmentMapper.toDTO(apartment);
     }
 
     @Override
     public ApartmentResponseDTO updateApartment(Long id, CreateApartmentRequest request) {
-        ApartmentEntity apartment = apartmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Apartment not found"));
-
+        ApartmentEntity apartment =
+                apartmentRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Apartment not found"));
 
         apartmentMapper.updateApartmentFromRequest(request, apartment);
         return apartmentMapper.toDTO(apartmentRepository.save(apartment));

@@ -1,9 +1,8 @@
 package com.real_estate.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @Getter
 @Setter

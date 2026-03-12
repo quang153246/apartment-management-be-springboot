@@ -1,8 +1,7 @@
 package com.real_estate.model.dto.response;
 
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @Data
 @Builder

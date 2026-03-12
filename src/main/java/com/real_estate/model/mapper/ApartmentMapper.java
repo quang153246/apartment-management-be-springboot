@@ -11,9 +11,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring")
 public interface ApartmentMapper {
     ApartmentEntity toEntity(CreateApartmentRequest request);
+
     ApartmentResponseDTO toDTO(ApartmentEntity entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateApartmentFromRequest(CreateApartmentRequest request,
-                                    @MappingTarget ApartmentEntity entity);
+    void updateApartmentFromRequest(
+            CreateApartmentRequest request, @MappingTarget ApartmentEntity entity);
 }

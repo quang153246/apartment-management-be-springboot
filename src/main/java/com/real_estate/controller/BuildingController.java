@@ -28,26 +28,27 @@ public class BuildingController {
                         .success(true)
                         .message("Create building successfully")
                         .data(building)
-                        .build()
-        );
+                        .build());
     }
 
     @GetMapping
-    public ResponseEntity<BaseResponseDTO<Page<BuildingResponseDTO>>> getBuildings(Long projectId, Pageable pageable) {
+    public ResponseEntity<BaseResponseDTO<Page<BuildingResponseDTO>>> getBuildings(
+            Long projectId, Pageable pageable) {
 
-        Page<BuildingResponseDTO> buildingPage = buildingService.getBuildingsByProjectId(projectId, pageable);
+        Page<BuildingResponseDTO> buildingPage =
+                buildingService.getBuildingsByProjectId(projectId, pageable);
 
         return ResponseEntity.ok(
                 BaseResponseDTO.<Page<BuildingResponseDTO>>builder()
                         .success(true)
                         .message("Get buildings successfully")
                         .data(buildingPage)
-                        .build()
-        );
+                        .build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponseDTO<BuildingResponseDTO>> getBuildingById(@PathVariable Long id) {
+    public ResponseEntity<BaseResponseDTO<BuildingResponseDTO>> getBuildingById(
+            @PathVariable Long id) {
 
         BuildingResponseDTO building = buildingService.getBuildingById(id);
 
@@ -56,14 +57,12 @@ public class BuildingController {
                         .success(true)
                         .message("Get building successfully")
                         .data(building)
-                        .build()
-        );
+                        .build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponseDTO<BuildingResponseDTO>> updateBuilding(
-            @PathVariable Long id,
-            @Valid @RequestBody CreateBuildingRequest request) {
+            @PathVariable Long id, @Valid @RequestBody CreateBuildingRequest request) {
 
         BuildingResponseDTO building = buildingService.updateBuilding(id, request);
 
@@ -72,8 +71,7 @@ public class BuildingController {
                         .success(true)
                         .message("Update building successfully")
                         .data(building)
-                        .build()
-        );
+                        .build());
     }
 
     @DeleteMapping("/{id}")
@@ -85,7 +83,6 @@ public class BuildingController {
                 BaseResponseDTO.<Void>builder()
                         .success(true)
                         .message("Delete building successfully")
-                        .build()
-        );
+                        .build());
     }
 }

@@ -3,12 +3,11 @@ package com.real_estate.model.dto.request;
 import com.real_estate.model.enums.ApartmentStatus;
 import com.real_estate.model.enums.ApartmentType;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
