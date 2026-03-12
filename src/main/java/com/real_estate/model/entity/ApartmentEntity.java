@@ -3,23 +3,24 @@ package com.real_estate.model.entity;
 import com.real_estate.model.enums.ApartmentStatus;
 import com.real_estate.model.enums.ApartmentType;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
-@Table(name = "apartments", indexes = {
-        @Index(name = "idx_building_id", columnList = "building_id"),
-        @Index(name = "idx_status", columnList = "status"),
-        @Index(name = "idx_type", columnList = "type")
-})
+@Table(
+        name = "apartments",
+        indexes = {
+            @Index(name = "idx_building_id", columnList = "building_id"),
+            @Index(name = "idx_status", columnList = "status"),
+            @Index(name = "idx_type", columnList = "type")
+        })
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ApartmentEntity extends AuditEntity{
+public class ApartmentEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

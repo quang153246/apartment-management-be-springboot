@@ -24,18 +24,21 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public BuildingResponseDTO createBuilding(CreateBuildingRequest request) {
-        ProjectEntity project = projectRepository.findById(request.getProjectId())
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        ProjectEntity project =
+                projectRepository
+                        .findById(request.getProjectId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
-        BuildingEntity building = BuildingEntity.builder()
-                .project(project)
-                .name(request.getName())
-                .code(request.getCode())
-                .floors(request.getFloors())
-                .totalApartments(request.getTotalApartments())
-                .description(request.getDescription())
-                .status(request.getStatus())
-                .build();
+        BuildingEntity building =
+                BuildingEntity.builder()
+                        .project(project)
+                        .name(request.getName())
+                        .code(request.getCode())
+                        .floors(request.getFloors())
+                        .totalApartments(request.getTotalApartments())
+                        .description(request.getDescription())
+                        .status(request.getStatus())
+                        .build();
 
         BuildingEntity saved = buildingRepository.save(building);
 
@@ -51,11 +54,15 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public BuildingResponseDTO updateBuilding(Long id, CreateBuildingRequest request) {
-        BuildingEntity building = buildingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
+        BuildingEntity building =
+                buildingRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
 
-        ProjectEntity project = projectRepository.findById(request.getProjectId())
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        ProjectEntity project =
+                projectRepository
+                        .findById(request.getProjectId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
         building.setProject(project);
         building.setName(request.getName());
@@ -72,8 +79,10 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public BuildingResponseDTO getBuildingById(Long id) {
-        BuildingEntity building = buildingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
+        BuildingEntity building =
+                buildingRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
 
         return buildingMapper.toDTO(building);
     }

@@ -1,11 +1,10 @@
 package com.real_estate.service.impl;
 
 import com.real_estate.exception.ResourceNotFoundException;
-import com.real_estate.model.dto.response.PageResponseDTO;
-import com.real_estate.model.entity.ProjectEntity;
-import com.real_estate.model.mapper.ProjectMapper;
 import com.real_estate.model.dto.request.CreateProjectRequest;
 import com.real_estate.model.dto.response.ProjectResponse;
+import com.real_estate.model.entity.ProjectEntity;
+import com.real_estate.model.mapper.ProjectMapper;
 import com.real_estate.repository.ProjectRepository;
 import com.real_estate.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -30,20 +29,26 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Page<ProjectResponse> getProjects(Pageable pageable) {
-        Page<ProjectEntity> projectPage =  projectRepository.findAll(pageable);
+        Page<ProjectEntity> projectPage = projectRepository.findAll(pageable);
 
-        return projectPage. map(projectMapper::toDTO);
+        return projectPage.map(projectMapper::toDTO);
     }
 
     @Override
     public ProjectResponse getProjectById(Long id) {
-        ProjectEntity project = projectRepository.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Project not found"));
+        ProjectEntity project =
+                projectRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         return projectMapper.toDTO(project);
     }
 
     @Override
     public ProjectResponse updateProject(Long id, CreateProjectRequest project) {
-        ProjectEntity updateProject = projectRepository.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Project not found"));
+        ProjectEntity updateProject =
+                projectRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
         updateProject.setName(project.getName());
         updateProject.setAddress(project.getAddress());
@@ -61,9 +66,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProject(Long id) {
-        ProjectEntity updateProject = projectRepository.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Project not found"));
+        ProjectEntity updateProject =
+                projectRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
         projectRepository.deleteById(id);
     }
-
 }

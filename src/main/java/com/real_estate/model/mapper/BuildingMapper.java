@@ -8,5 +8,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface BuildingMapper {
     BuildingEntity toEntity(CreateBuildingRequest request);
+
     BuildingResponseDTO toDTO(BuildingEntity entity);
 }
