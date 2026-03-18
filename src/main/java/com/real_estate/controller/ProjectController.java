@@ -4,6 +4,7 @@ import com.real_estate.model.dto.request.CreateProjectRequest;
 import com.real_estate.model.dto.response.BaseResponseDTO;
 import com.real_estate.model.dto.response.ProjectResponse;
 import com.real_estate.service.ProjectService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +18,7 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @PostMapping("")
-    ResponseEntity<BaseResponseDTO<ProjectResponse>> createProject(
-            @RequestBody CreateProjectRequest request) {
+    ResponseEntity<BaseResponseDTO<ProjectResponse>> createProject(@Valid @RequestBody CreateProjectRequest request) {
         ProjectResponse project = projectService.createProject(request);
 
         return ResponseEntity.ok()
@@ -69,7 +69,7 @@ public class ProjectController {
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponseDTO<ProjectResponse>> updateProject(
-            @PathVariable Long id, @RequestBody CreateProjectRequest request) {
+            @PathVariable Long id,@Valid @RequestBody CreateProjectRequest request) {
 
         ProjectResponse response = projectService.updateProject(id, request);
 

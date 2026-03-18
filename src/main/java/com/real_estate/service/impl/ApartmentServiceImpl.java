@@ -30,26 +30,10 @@ public class ApartmentServiceImpl implements ApartmentService {
                         .findById(request.getBuildingId())
                         .orElseThrow(() -> new ResourceNotFoundException("Building not found"));
 
-        ApartmentEntity apartment =
-                ApartmentEntity.builder()
-                        .building(building)
-                        .code(request.getCode())
-                        .floor(request.getFloor())
-                        .area(request.getArea())
-                        .bedrooms(request.getBedrooms())
-                        .bathrooms(request.getBathrooms())
-                        .direction(request.getDirection())
-                        .view(request.getView())
-                        .status(request.getStatus())
-                        .type(request.getType())
-                        .priceSale(request.getPriceSale())
-                        .priceRent(request.getPriceRent())
-                        .description(request.getDescription())
-                        .build();
+        ApartmentEntity apartment = apartmentMapper.toEntity(request);
+        apartment.setBuilding(building);
 
-        apartmentRepository.save(apartment);
-
-        return apartmentMapper.toDTO(apartment);
+        return apartmentMapper.toDTO(apartmentRepository.save(apartment));
     }
 
     @Override

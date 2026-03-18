@@ -33,7 +33,7 @@ public class BuildingController {
 
     @GetMapping
     public ResponseEntity<BaseResponseDTO<Page<BuildingResponseDTO>>> getBuildings(
-            Long projectId, Pageable pageable) {
+            @RequestParam Long projectId, Pageable pageable) {
 
         Page<BuildingResponseDTO> buildingPage =
                 buildingService.getBuildingsByProjectId(projectId, pageable);

@@ -66,11 +66,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProject(Long id) {
-        ProjectEntity updateProject =
-                projectRepository
-                        .findById(id)
-                        .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        ProjectEntity project = projectRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
-        projectRepository.deleteById(id);
+        projectRepository.delete(project);
     }
 }

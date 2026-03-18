@@ -1,8 +1,9 @@
 package com.real_estate.model.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectEntity {
+public class ProjectEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
