@@ -3,9 +3,9 @@ package com.real_estate.model.entity;
 import com.real_estate.model.enums.ApartmentStatus;
 import com.real_estate.model.enums.ApartmentType;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(
@@ -60,7 +60,4 @@ public class ApartmentEntity extends AuditEntity {
 
     @Column(columnDefinition = "TEXT")
     private String description;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
 }
